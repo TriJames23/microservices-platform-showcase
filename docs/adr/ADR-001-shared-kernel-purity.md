@@ -2,7 +2,7 @@
 
 **Status**: ✅ Accepted  
 **Date**: 2025-Q4  
-**Enforced By**: ArchUnit (5 rules) — 🔴 BLOCKER
+**Enforced By**: ArchUnit (5 rules)
 
 ---
 
@@ -68,4 +68,4 @@ The `shared-kernel` (domain/application) will be **Pure Java**.
 ## Related ADRs
 
 - [ADR-002](ADR-002-infrastructure-only-shared-services.md): Infrastructure-Only Shared Services
-- [ADR-018](ADR-018-clean-boundary-enforcement.md): Clean Boundary Enforcement
+- [ADR-008](ADR-008-passive-observability.md): Passive Observability

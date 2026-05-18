@@ -1,6 +1,6 @@
 # ADR-018: Clean Architecture Boundary Enforcement by Module
 
-**Status**: ✅ Accepted  
+**Status**: Accepted  
 **Date**: 2026-Q1  
 **Enforced By**: ArchUnit + Code Review
 
@@ -8,7 +8,7 @@
 
 ## Context
 
-The platform spans multiple modules (shared-kernel, shared-services, service modules). Without a strict boundary rule set, abstractions leak and architecture drifts silently.
+The platform spans multiple modules (shared-kernel, shared-services, service modules). Without a strict boundary rule set, abstractions leak and architecture drifts.
 
 ---
 
@@ -16,13 +16,11 @@ The platform spans multiple modules (shared-kernel, shared-services, service mod
 
 Define and enforce module boundaries:
 
-| Module | Allowed |
-|---|---|
-| `shared-kernel` | Domain primitives and base abstractions only — no infrastructure |
-| `shared-services` | Infrastructure-only implementations — no domain rules |
-| `service-application` | Use cases, ports, policies, CQRS handlers only |
-| `service-domain` | Aggregates, entities, domain events only |
-| `service-infrastructure` | Adapters, wiring, configuration only |
+- **shared-kernel**: domain primitives and base abstractions only, no infrastructure
+- **shared-services**: infrastructure-only implementations, no domain rules
+- **service-application**: use cases, ports, policies, CQRS handlers only
+- **service-domain**: aggregates, entities, domain events only
+- **service-infrastructure**: adapters, wiring, configuration only
 
 ---
 
@@ -35,29 +33,28 @@ Define and enforce module boundaries:
 
 ---
 
-## Enforcement
-
-**ArchUnit rules** verify package boundaries at build time.  
-**Code review checklist** covers cross-module dependencies.
-
-A violation here is a CI failure — not a review comment.
-
----
-
 ## Consequences
 
 ### Positive
-✅ Predictable layering across all services  
-✅ Safer refactors — changes are bounded  
-✅ Clear ownership boundaries
+- Predictable layering
+- Safer refactors
+- Clear ownership boundaries
 
 ### Negative
-⚠️ More discipline required per PR  
-⚠️ Some mapping duplication across layers
+- More discipline required
+- Some duplication across services
+
+---
+
+## Enforcement
+
+- ArchUnit rules for package boundaries
+- Code review checklist for cross-module dependencies
 
 ---
 
 ## Related ADRs
 
 - [ADR-001](ADR-001-shared-kernel-purity.md): Shared Kernel Purity
-- ADR-002: Infrastructure-Only Shared Services
+- [ADR-002](ADR-002-infrastructure-only-shared-services.md): Shared Services Scope
+
